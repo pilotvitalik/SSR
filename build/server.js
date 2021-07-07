@@ -6,7 +6,7 @@ const hostname = process.env.HOSTNAME;
 const port = process.env.PORT;
 
 const server = http.createServer((req, res) => {
-	if (req.url !== '/') return false;
+	if (req.url === '/favicon.ico') return false;
 	sendReq(res);
 });
 
