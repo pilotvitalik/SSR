@@ -1,3 +1,3 @@
-/.env
+/SSR/.env
 
-/build/node_modules/
+/SSR/node_modules/
