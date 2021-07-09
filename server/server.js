@@ -15,6 +15,7 @@ const connection = mysql.createConnection({
 
 const server = http.createServer((req, res) => {
 	if (req.url === '/favicon.ico') return false;
+	console.log(req.url);
 	sendReq(res);
 });
 
