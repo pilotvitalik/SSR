@@ -1,0 +1,46 @@
+.wrapper{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+.tableTitle,
+.tableBody>div{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	position: relative;
+	width: fit-content;
+	height: auto;
+}
+.tableBody{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: fit-content;
+	height: auto;
+}
+.tableTitle p,
+.tableBody>div p{
+	display: inline-block;
+	position: relative;
+	width: 42px;
+	height: auto;
+	padding: 5px;
+	text-align: center;
+}
+.tableTitle p:nth-child(2),
+.tableTitle p:nth-child(3),
+.tableBody>div p:nth-child(2),
+.tableBody>div p:nth-child(3){
+	width:  100px;
+}
+.tableTitle p:nth-child(4),
+.tableBody>div p:nth-child(4){
+	width: 85px;
+}
+.tableTitle p:last-child,
+.tableBody>div p:last-child{
+	width: 65px;
+}
