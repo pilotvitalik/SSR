@@ -7,7 +7,6 @@ function Add_point(obj){
 	const [title, setTitle] = useState('');
 	const [distance, setDistance] = useState('');
 	const [time, setTime] = useState('');
-	const [pointId, setPointId] = useState('');
 	const [statusReq, setStatusReq] = useState('');
 
 
@@ -15,7 +14,7 @@ function Add_point(obj){
 		const coefTime = 60;
 		const coefDistance = 1000;
 		const coefSpeed = 3.6;
-		const speed = Math.round((Number(distance) * coefDistance) / (Number(time) * coefTime) * coefSpeed);
+		const speed = (Number(distance) * coefDistance) / (Number(time) * coefTime) * coefSpeed;
 		const obj = {};
 		obj.title = title;
 		obj.distance = distance;
@@ -23,10 +22,13 @@ function Add_point(obj){
 		if (isNaN(distance) && isNaN(time)){
 			obj.speed = '-';
 		} else {
-			obj.speed = String(speed);
+			obj.speed = String(Math.round(speed * 0.85));
 		}
-		obj.pointId = pointId;
 		sendData(JSON.stringify(obj));
+		setTitle('');
+		setDistance('');
+		setTime('');
+		setStatusReq('');
 	}
 
 	async function sendData(data){
@@ -70,13 +72,6 @@ function Add_point(obj){
 						name='time'
 						value={time}
 						onChange={() => setTime(event.target.value)}/>
-				</label>
-				<label>
-					pointId:
-					<input type='text'
-						name='pointId'
-						value={pointId}
-						onChange={() => setPointId(event.target.value)}/>
 				</label>
 				<button type='button' onClick={addPoint}>
 					Добавить
