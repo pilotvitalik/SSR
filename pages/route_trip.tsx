@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import {GetServerSideProps} from 'next';
 import style from '../styles/Route_trip.module.css';
 
-function Route_trip({arr}){
+function Route_trip({arr}:AppProps){
   return(
     <div className={style.wrapper}>
       <div className={style.tableTitle}>
@@ -51,11 +52,10 @@ function Route_trip({arr}){
   )
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await fetch(`${process.env.HOSTNAME}${process.env.MAINDATA}`)
   const json = res.body._readableState.buffer.head.data.toString();
   const arr = await JSON.parse(json);
-  console.log(arr);
   return { props: {arr} }
 }
 

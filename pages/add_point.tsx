@@ -20,7 +20,11 @@ function Add_point(obj){
 		obj.title = title;
 		obj.distance = distance;
 		obj.time = time;
-		obj.speed = String(speed);
+		if (isNaN(distance) && isNaN(time)){
+			obj.speed = '-';
+		} else {
+			obj.speed = String(speed);
+		}
 		obj.pointId = pointId;
 		sendData(JSON.stringify(obj));
 	}

@@ -34,7 +34,7 @@
 .tableTitle p:nth-child(3),
 .tableBody>div p:nth-child(2),
 .tableBody>div p:nth-child(3){
-	width:  100px;
+	width:  150px;
 }
 .tableTitle p:nth-child(4),
 .tableBody>div p:nth-child(4){
