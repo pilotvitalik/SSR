@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import style from './Route_trip.module.css';
+import style from './route_trip.module.css';
 import axios from 'axios';  
 import {Link} from 'react-router-dom'
 
@@ -9,17 +9,13 @@ function Route_trip(){
   function firstRequest(){
     axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_MAINDATA}`)
       .then(function (response) {
-        // handle success
-        console.log(response.data);
         setArr(response.data);
       })
       .catch(function (error) {
-        // handle error
-        console.log(error);
+        alert(error);
       })
   }
 
-  console.log(arr);
   const list = arr.map((item) => 
     <div key={item.id}>
       <p>
@@ -68,7 +64,7 @@ function Route_trip(){
         list
       }
       </div>
-      <Link to="/add_point">Добавить точку</Link>
+      <Link className={style.link} to="/add_point">Добавить точку</Link>
     </div>
   )
 }

@@ -1,12 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import ListRoute from './route_trip';
-import AddPoint from './add_point';
+import ListRoute from './List_points/Route_trip';
+import AddPoint from './Add_point/Add_point';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 function App() {

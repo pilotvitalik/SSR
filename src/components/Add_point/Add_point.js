@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import styles from './Add_point.module.css';
+import styles from './add_point.module.css';
 import {Link} from 'react-router-dom'
 
 function Add_point(){
