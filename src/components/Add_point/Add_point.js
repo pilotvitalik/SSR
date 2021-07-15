@@ -31,7 +31,7 @@ function Add_point(){
 		setStatusReq('');
 	}
 
-	async function sendData(data){
+	function sendData(data){
 		axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_ADD}`, data)
 		  .then(function (response) {
 		    if(response.status === 200){
