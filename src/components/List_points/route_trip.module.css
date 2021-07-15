@@ -23,7 +23,7 @@
 	height: auto;
 }
 .tableTitle p,
-.tableBody>div input{
+.tableBody>div p{
 	display: inline-block;
 	position: relative;
 	width: 42px;
@@ -33,17 +33,26 @@
 }
 .tableTitle p:nth-child(2),
 .tableTitle p:nth-child(3),
-.tableBody>div p,
-.tableBody>div input:nth-child(3){
+.tableBody>div p:nth-child(2){
 	width:  150px;
 }
-.tableTitle p:nth-child(4),
-.tableBody>div input:nth-child(4){
+.tableBody>div input:nth-child(3){
+	width: 154px;
+	text-align: center;
+}
+.tableTitle p:nth-child(4){
 	width: 85px;
 }
-.tableTitle p:last-child,
-.tableBody>div input:nth-child(5){
+.tableBody>div input:nth-child(4){
+	width:  89px;
+	text-align: center;
+}
+.tableTitle p:last-child{
 	width: 90px;
+}
+.tableBody>div input:nth-child(5){
+	width:  94px;
+	text-align: center;
 }
 .link{
 	margin-bottom:  15px;

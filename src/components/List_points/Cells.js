@@ -4,7 +4,6 @@ import style from './route_trip.module.css';
 
 function CellsRow(props){
     const [point, updPoint] = useState(props.val.point);
-    const [id, updId] = useState(props.val.id);
     const [time, updTime] = useState(props.val.time);
     const [speed, updSpeed] = useState(props.val.speed);
     const [distance, updDistance] = useState(props.val.distance);
@@ -19,14 +18,15 @@ function CellsRow(props){
 
     function changeVal(e, func, titleField){
         let obj = collectData;
-        obj[titleField] = {value: (!e.target.value) ? 0 : e.target.value};
+        if (!obj.hasOwnProperty('id')) obj.id = props.val.id;
+        obj[titleField] = (!e.target.value) ? 0 : e.target.value;
         changeSendData(obj);
         func(e.target.value);
     }
 
     function sendData() {
         setModify(false);
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/react/edit`, collectData)
+        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_EDIT}`, JSON.stringify(collectData))
             .then(function (response) {
                 console.log(response);
             })
@@ -42,10 +42,7 @@ function CellsRow(props){
 
     return(
         <div>
-            <input type='text'
-                   value={id}
-                   className={!isModify ? style.notInput : ''}
-                   onChange={(e) => changeVal(e, updId, 'id')}/>
+            <p>{props.val.id}</p>
             {pointField}
             <input type='text'
                    value={time}
