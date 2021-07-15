@@ -28,10 +28,21 @@ function CellsRow(props){
         setModify(false);
         axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_EDIT}`, JSON.stringify(collectData))
             .then(function (response) {
-                console.log(response);
+                alert(response.data);
             })
             .catch(function (error) {
-                console.log(error)
+                alert(JSON.stringify(error))
+            });
+    }
+
+    function deleteString(){
+        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_DELETE}`, JSON.stringify({id: props.val.id}))
+            .then(function (response) {
+                console.log(response.data)
+                alert(response.data);
+            })
+            .catch(function (error) {
+                alert(JSON.stringify(error))
             });
     }
 
@@ -64,7 +75,7 @@ function CellsRow(props){
                             : 'Ред.'
                     }
                 </button>
-                <button type='button'>
+                <button type='button' onClick={() => deleteString()}>
                     Удал.
                 </button>
             </div>
