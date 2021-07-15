@@ -23,7 +23,7 @@
 	height: auto;
 }
 .tableTitle p,
-.tableBody>div p{
+.tableBody>div input{
 	display: inline-block;
 	position: relative;
 	width: 42px;
@@ -33,20 +33,25 @@
 }
 .tableTitle p:nth-child(2),
 .tableTitle p:nth-child(3),
-.tableBody>div p:nth-child(2),
-.tableBody>div p:nth-child(3){
+.tableBody>div p,
+.tableBody>div input:nth-child(3){
 	width:  150px;
 }
 .tableTitle p:nth-child(4),
-.tableBody>div p:nth-child(4){
+.tableBody>div input:nth-child(4){
 	width: 85px;
 }
 .tableTitle p:last-child,
-.tableBody>div p:nth-child(5){
+.tableBody>div input:nth-child(5){
 	width: 90px;
 }
 .link{
 	margin-bottom:  15px;
+}
+.notInput{
+	border: 1px solid transparent;
+	pointer-events: none;
+	resize: none;
 }
 .modifyBlock{
 	display: flex;
@@ -55,6 +60,7 @@
 	position: relative;
 	width: auto;
 	height: 100%;
+	margin-left: 10px;
 }
 .editBtn{
 	position: relative;

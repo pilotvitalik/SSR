@@ -16,25 +16,19 @@ function Route_trip() {
             })
     }
 
+    function modifyString(id){
+        console.log(id);
+    }
+
     const list = arr.map((item) =>
         <div key={item.id}>
-            <p>
-                {item.id}
-            </p>
-            <p>
-                {item.point}
-            </p>
-            <p>
-                {item.time}
-            </p>
-            <p>
-                {item.speed}
-            </p>
-            <p>
-                {item.distance}
-            </p>
+            <input type='text' value={item.id} className={style.notInput}/>
+            <p>{item.point}</p>
+            <input type='text' value={item.time} className={style.notInput}/>
+            <input type='text' value={item.speed} className={style.notInput}/>
+            <input type='text' value={item.distance} className={style.notInput}/>
             <div className={style.modifyBlock}>
-                <button type='button' className={style.editBtn}>
+                <button type='button' className={style.editBtn} onClick={() => modifyString(item.id)}>
                     Ред.
                 </button>
                 <button type='button'>
