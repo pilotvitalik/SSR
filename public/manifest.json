@@ -1,6 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "manifest-version": "0.1.0",
+  "version": "0.3.0",
+  "name": "Navigate route",
+  "short_name": "Navigate route",
+  "desciption": "Offline navigate by route",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,6 +21,7 @@
       "sizes": "512x512"
     }
   ],
+  
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
