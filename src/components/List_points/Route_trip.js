@@ -49,7 +49,11 @@ function Route_trip() {
                     list
                 }
             </div>
-            <Link className={style.link} to="/add_point">Добавить точку</Link>
+            <div className={style.navigateBlock}>
+                <Link className={style.link} to="/add_point">Добавить точку</Link>
+                <button type='button' className={style.startBtn}>Старт</button>
+                <button type='button' className={style.stopBtn}>Стоп</button>
+            </div>
         </div>
     )
 }

@@ -75,3 +75,21 @@
 	position: relative;
 	margin-right: 7px;
 }
+.navigateBlock{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+.startBtn,
+.stopBtn{
+	display: inline-block;
+	position: relative;
+	width: 100px;
+	height: auto;
+}
+.startBtn{
+	margin: 0 10px;
+}
