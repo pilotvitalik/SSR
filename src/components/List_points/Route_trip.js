@@ -32,6 +32,9 @@ function Route_trip() {
                     № п/п
                 </p>
                 <p>
+                    Статус
+                </p>
+                <p>
                     Точка
                 </p>
                 <p>

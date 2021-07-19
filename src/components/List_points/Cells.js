@@ -38,7 +38,6 @@ function CellsRow(props){
     function deleteString(){
         axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_DELETE}`, JSON.stringify({id: props.val.id}))
             .then(function (response) {
-                console.log(response.data)
                 alert(response.data);
             })
             .catch(function (error) {
@@ -54,6 +53,12 @@ function CellsRow(props){
     return(
         <div>
             <p>{props.val.id}</p>
+            <label>
+                <input type='checkbox'
+                    name={props.val.distance + '_' + props.val.id}
+                    checked={+props.val.isChecked}
+                    onChange={(e) => changeVal(e, '1', 'ss')}/>
+            </label>
             {pointField}
             <input type='text'
                    value={time}

@@ -31,26 +31,40 @@
 	padding: 5px;
 	text-align: center;
 }
-.tableTitle p:nth-child(2),
+.tableTitle p:nth-child(2){
+	width:  55px;
+}
+.tableBody>div label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width:  65px;
+}
+.tableBody>div textarea{
+	width:  160px;
+}
 .tableTitle p:nth-child(3),
-.tableBody>div p:nth-child(2){
+.tableBody>div p:nth-child(3){
 	width:  150px;
 }
-.tableBody>div input:nth-child(3){
-	width: 154px;
-	text-align: center;
-}
 .tableTitle p:nth-child(4){
-	width: 85px;
+	width:  50px;
 }
 .tableBody>div input:nth-child(4){
+	width: 54px;
+	text-align: center;
+}
+.tableTitle p:nth-child(5){
+	width: 85px;
+}
+.tableBody>div input:nth-child(5){
 	width:  89px;
 	text-align: center;
 }
 .tableTitle p:last-child{
 	width: 90px;
 }
-.tableBody>div input:nth-child(5){
+.tableBody>div input:nth-child(6){
 	width:  94px;
 	text-align: center;
 }
