@@ -9,6 +9,7 @@ function CellsRow(props){
     const [distance, updDistance] = useState(props.val.distance);
     const [isModify, setModify] = useState(false);
     const [collectData, changeSendData] = useState({});
+    const [isChecked, setChecked] = useState(+props.val.isChecked);
 
     function modifyString(){
         !isModify
@@ -45,9 +46,23 @@ function CellsRow(props){
             });
     }
 
+    function passagePoint(){
+        let obj = {
+            id: props.val.id,
+            val: !isChecked,
+        }
+        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_CHECK_POINT}`, JSON.stringify(obj))
+            .then(function (response) {
+                setChecked(response.data.status);
+            })
+            .catch(function (error) {
+                alert(JSON.stringify(error))
+            });
+    }
+
     let pointField = isModify
         ? <textarea value={point}
-                    onChange={(e) => changeVal(e, updPoint, 'point')}/>
+                    onChange={(e) => passagePoint(e, updPoint, 'point')}/>
         : <p>{point}</p>
 
     return(
@@ -56,8 +71,8 @@ function CellsRow(props){
             <label>
                 <input type='checkbox'
                     name={props.val.distance + '_' + props.val.id}
-                    checked={+props.val.isChecked}
-                    onChange={(e) => changeVal(e, '1', 'ss')}/>
+                    checked={isChecked}
+                    onChange={() => passagePoint()}/>
             </label>
             {pointField}
             <input type='text'
