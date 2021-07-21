@@ -7,6 +7,7 @@ import Cells from './Cells';
 function Route_trip() {
     const [arr, setArr] = useState([]);
     const [showPause, isShowPause] = useState(false);
+    const [startInd, setStartInd] = useState('');
 
     function firstRequest() {
         axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_MAINDATA}`)
@@ -19,6 +20,19 @@ function Route_trip() {
     }
 
     function startRoute(){
+        let startDate = new Date()
+        let startDateMil = Date.now();
+        let period = 22 * 1000 * 60;
+        let stopDateMil = startDate + period;
+        let stopDate = new Date(stopDateMil);
+        axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`)
+            .then(function (response) {
+                setStartInd(response.data[0]['MIN(id)']);
+                console.log(response.data[0]['MIN(id)']);
+            })
+            .catch(function (error) {
+                alert(error);
+            })
         isShowPause(true);
     }
 
