@@ -6,6 +6,7 @@ import Cells from './Cells';
 
 function Route_trip() {
     const [arr, setArr] = useState([]);
+    const [showPause, isShowPause] = useState(false);
 
     function firstRequest() {
         axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_MAINDATA}`)
@@ -15,6 +16,14 @@ function Route_trip() {
             .catch(function (error) {
                 alert(error);
             })
+    }
+
+    function startRoute(){
+        isShowPause(true);
+    }
+
+    function stopRoute(){
+        isShowPause(false);
     }
 
     const list = arr.map((item) =>
@@ -54,11 +63,11 @@ function Route_trip() {
             </div>
             <div className={style.navigateBlock}>
                 <Link className={style.link} to="/add_point">Добавить точку</Link>
-                <button type='button' className={style.startBtn}>Старт</button>
-                <button type='button' className={style.stopBtn}>Стоп</button>
+                <button type='button' className={style.startBtn} onClick={() => startRoute()}>Старт</button>
+                <button type='button' className={showPause ? [style.pauseBtn, style.show] : style.pauseBtn}>Пауза</button>
+                <button type='button' className={style.stopBtn} onClick={() => stopRoute()}>Стоп</button>
             </div>
         </div>
     )
 }
-
 export default Route_trip;

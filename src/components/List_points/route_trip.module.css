@@ -98,11 +98,18 @@
 	height: auto;
 }
 .startBtn,
-.stopBtn{
+.stopBtn,
+.pauseBtn{
 	display: inline-block;
 	position: relative;
 	width: 100px;
 	height: auto;
+}
+.pauseBtn{
+	display: none;
+}
+.pauseBtn.show{
+	display: inline-block;
 }
 .startBtn{
 	margin: 0 10px;
