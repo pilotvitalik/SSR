@@ -7,12 +7,10 @@ import Cells from './Cells';
 function Route_trip() {
     const [arr, setArr] = useState([]);
     const [showPause, isShowPause] = useState(false);
-    const [startInd, setStartInd] = useState('');
 
     function firstRequest() {
         axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_MAINDATA}`)
             .then(function (response) {
-                console.log(response.data);
                 setArr(response.data);
             })
             .catch(function (error) {
@@ -24,7 +22,7 @@ function Route_trip() {
         let startDate = Date.now();
         axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`, JSON.stringify({time: startDate}))
             .then(function (response) {
-                //setStartInd(response.data[0]['MIN(id)']);
+                setArr(response.data);
                 alert('Время пересчитано');
             })
             .catch(function (error) {

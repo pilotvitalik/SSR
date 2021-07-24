@@ -79,7 +79,7 @@ function CellsRow(props){
             <input type='text'
                    value={duration}
                    className={!isModify ? style.duration + ' ' + style.notInput : style.duration}
-                   onChange={(e) => changeVal(e, updDuration, 'time')}/>
+                   onChange={(e) => changeVal(e, updDuration, 'duration')}/>
             <input type='text'
                    value={speed}
                    className={!isModify ? style.speed + ' ' + style.notInput : style.speed}

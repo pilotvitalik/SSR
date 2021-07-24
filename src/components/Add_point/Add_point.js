@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styles from './add_point.module.css';
 import {Link} from 'react-router-dom'
@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 function Add_point(){
 	const [title, setTitle] = useState('');
 	const [distance, setDistance] = useState('');
-	const [time, setTime] = useState('');
+	const [duration, setDuration] = useState('');
 	const [statusReq, setStatusReq] = useState('');
 
 
@@ -14,12 +14,12 @@ function Add_point(){
 		const coefTime = 60;
 		const coefDistance = 1000;
 		const coefSpeed = 3.6;
-		const speed = (Number(distance) * coefDistance) / (Number(time) * coefTime) * coefSpeed;
+		const speed = (Number(distance) * coefDistance) / (Number(duration) * coefTime) * coefSpeed;
 		const obj = {};
 		obj.title = title;
 		obj.distance = distance;
-		obj.time = time;
-		if (isNaN(distance) && isNaN(time)){
+		obj.duration = duration;
+		if (isNaN(distance) && isNaN(duration)){
 			obj.speed = '-';
 		} else {
 			obj.speed = String(Math.round(speed * 0.85));
@@ -27,7 +27,7 @@ function Add_point(){
 		sendData(JSON.stringify(obj));
 		setTitle('');
 		setDistance('');
-		setTime('');
+		setDuration('');
 		setStatusReq('');
 	}
 
@@ -36,9 +36,6 @@ function Add_point(){
 		  .then(function (response) {
 		    if(response.status === 200){
 		    	setStatusReq(response.data);
-		    	setTimeout(() => {
-		    		setStatusReq('');
-		    	}, 2000)
 		    }
 		  })
 		  .catch(function (error) {
@@ -48,6 +45,14 @@ function Add_point(){
 		  	}, 2000)
 		  });
 	}
+
+	useEffect(() => {
+		let hiddenAlert;
+		if (statusReq){
+			hiddenAlert = setTimeout(() => {setStatusReq('');}, 2000);
+		}
+		return () => {clearTimeout(hiddenAlert);}
+	})
 
 	return (
 		<div>
@@ -69,9 +74,9 @@ function Add_point(){
 				<label>
 					Время:
 					<input type='text'
-						name='time'
-						value={time}
-						onChange={(event) => setTime(event.target.value)}/>
+						name='duration'
+						value={duration}
+						onChange={(event) => setDuration(event.target.value)}/>
 				</label>
 				<button type='button' onClick={addPoint}>
 					Добавить
