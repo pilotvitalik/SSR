@@ -12,6 +12,7 @@ function Route_trip() {
     function firstRequest() {
         axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_MAINDATA}`)
             .then(function (response) {
+                console.log(response.data);
                 setArr(response.data);
             })
             .catch(function (error) {
@@ -20,15 +21,11 @@ function Route_trip() {
     }
 
     function startRoute(){
-        let startDate = new Date()
-        let startDateMil = Date.now();
-        let period = 22 * 1000 * 60;
-        let stopDateMil = startDate + period;
-        let stopDate = new Date(stopDateMil);
-        axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`)
+        let startDate = Date.now();
+        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`, JSON.stringify({time: startDate}))
             .then(function (response) {
-                setStartInd(response.data[0]['MIN(id)']);
-                console.log(response.data[0]['MIN(id)']);
+                //setStartInd(response.data[0]['MIN(id)']);
+                alert('Время пересчитано');
             })
             .catch(function (error) {
                 alert(error);
@@ -51,23 +48,26 @@ function Route_trip() {
     return (
         <div className={style.wrapper}>
             <div className={style.tableTitle}>
-                <p>
+                <p className={style.idPoint}>
                     № п/п
                 </p>
-                <p>
+                <p className={style.status}>
                     Статус
                 </p>
-                <p>
+                <p className={style.point}>
                     Точка
                 </p>
-                <p>
-                    Время
+                <p className={style.duration}>
+                    Время до точки
                 </p>
-                <p>
+                <p className={style.speed}>
                     Скорость
                 </p>
-                <p>
+                <p className={style.distance}>
                     Расстояние
+                </p>
+                <p className={style.time}>
+                    Время
                 </p>
             </div>
             <div className={style.tableBody}>

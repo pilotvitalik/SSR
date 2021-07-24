@@ -4,7 +4,7 @@ import style from './route_trip.module.css';
 
 function CellsRow(props){
     const [point, updPoint] = useState(props.val.point);
-    const [time, updTime] = useState(props.val.time);
+    const [duration, updDuration] = useState(props.val.duration);
     const [speed, updSpeed] = useState(props.val.speed);
     const [distance, updDistance] = useState(props.val.distance);
     const [isModify, setModify] = useState(false);
@@ -62,13 +62,14 @@ function CellsRow(props){
 
     let pointField = isModify
         ? <textarea value={point}
+                    className={style.point}
                     onChange={(e) => passagePoint(e, updPoint, 'point')}/>
-        : <p>{point}</p>
+        : <p className={style.point + ' ' + style.notTextarea}>{point}</p>
 
     return(
         <div>
-            <p>{props.val.id}</p>
-            <label>
+            <p className={style.idPoint}>{props.val.id}</p>
+            <label className={style.status}>
                 <input type='checkbox'
                     name={props.val.distance + '_' + props.val.id}
                     checked={isChecked}
@@ -76,17 +77,20 @@ function CellsRow(props){
             </label>
             {pointField}
             <input type='text'
-                   value={time}
-                   className={!isModify ? style.notInput : ''}
-                   onChange={(e) => changeVal(e, updTime, 'time')}/>
+                   value={duration}
+                   className={!isModify ? style.duration + ' ' + style.notInput : style.duration}
+                   onChange={(e) => changeVal(e, updDuration, 'time')}/>
             <input type='text'
                    value={speed}
-                   className={!isModify ? style.notInput : ''}
+                   className={!isModify ? style.speed + ' ' + style.notInput : style.speed}
                    onChange={(e) => changeVal(e, updSpeed, 'speed')}/>
             <input type='text'
                    value={distance}
-                   className={!isModify ? style.notInput : ''}
+                   className={!isModify ? style.distance + ' ' + style.notInput : style.distance}
                    onChange={(e) => changeVal(e, updDistance, 'distance')}/>
+            <p className={style.time}>
+                {props.val.time}
+            </p>
             <div className={style.modifyBlock}>
                 <button type='button' className={style.editBtn} onClick={() => modifyString()}>
                     {
