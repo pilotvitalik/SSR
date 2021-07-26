@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import style from './route_trip.module.css';
 
@@ -46,34 +46,43 @@ function CellsRow(props){
             });
     }
 
-    function passagePoint(){
+    function prepareForAjax(){
+        let startDate = Date.now();
         let obj = {
             id: props.val.id,
             val: !isChecked,
+            time: startDate,
         }
-        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_CHECK_POINT}`, JSON.stringify(obj))
-            .then(function (response) {
-                setChecked(response.data.status);
-            })
-            .catch(function (error) {
-                alert(JSON.stringify(error))
-            });
+        props.func(obj);
     }
+
+    useEffect(() => {
+        if (isChecked !== +props.val.isChecked) setChecked(+props.val.isChecked);
+    }, [setChecked, isChecked, props.val.isChecked])
 
     let pointField = isModify
         ? <textarea value={point}
                     className={style.point}
-                    onChange={(e) => passagePoint(e, updPoint, 'point')}/>
+                    onChange={(e) => changeVal(e, updPoint, 'point')}/>
         : <p className={style.point + ' ' + style.notTextarea}>{point}</p>
 
+    let actPoint = '';
+    if (+props.id !== 0){
+        actPoint = (Boolean(+props.arr[+props.id - 1].isChecked) && !Boolean(+props.arr[+props.id].isChecked))
+        ? style.actPoint
+        : ''
+    }
+
     return(
-        <div>
+        <div className={Boolean(+props.val.isChecked)
+            ? style.passedPoint
+            : '' + ' ' + actPoint}>
             <p className={style.idPoint}>{props.val.id}</p>
             <label className={style.status}>
                 <input type='checkbox'
                     name={props.val.distance + '_' + props.val.id}
                     checked={isChecked}
-                    onChange={() => passagePoint()}/>
+                    onChange={() => prepareForAjax()}/>
             </label>
             {pointField}
             <input type='text'
@@ -90,6 +99,11 @@ function CellsRow(props){
                    onChange={(e) => changeVal(e, updDistance, 'distance')}/>
             <p className={style.time}>
                 {props.val.time}
+            </p>
+            <p className={Boolean(+props.val.isDelay) 
+                ? style.timetable + ' ' + style.later
+                : style.timetable + ' ' + style.early}>
+                {props.val.diff}
             </p>
             <div className={style.modifyBlock}>
                 <button type='button' className={style.editBtn} onClick={() => modifyString()}>

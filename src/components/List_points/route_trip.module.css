@@ -55,14 +55,14 @@
 	width:  120px;
 }
 .tableTitle .duration{
-	width:  60px;
+	width:  70px;
 }
 .tableBody .duration.notInput{
-	width: 64px;
+	width: 74px;
 	text-align: center;
 }
 .tableBody .duration{
-	width: 62px;
+	width: 72px;
 }
 .tableTitle .speed{
 	width: 85px;
@@ -83,6 +83,16 @@
 }
 .tableBody .distance{
 	width: 92px;
+}
+.tableTitle .timetable,
+.tableBody .timetable{
+	width: 60px;
+}
+.timetable.later{
+	color:  #ff5858;
+}
+.timetable.early{
+	color:  #42bd42;
 }
 .link{
 	margin-bottom:  15px;
@@ -126,7 +136,19 @@
 }
 .pauseBtn.show{
 	display: inline-block;
+	margin:  0 10px;
 }
 .startBtn{
 	margin: 0 10px;
+}
+.startBtn.activePause{
+	margin: 0 0 0 10px;
+}
+.passedPoint,
+.passedPoint .notInput{
+	background: #ff9a9a;
+}
+.actPoint,
+.actPoint .notInput{
+	background:  #ffbb40;
 }

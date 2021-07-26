@@ -7,10 +7,13 @@ import Cells from './Cells';
 function Route_trip() {
     const [arr, setArr] = useState([]);
     const [showPause, isShowPause] = useState(false);
+    const [pauseText, setPauseText] = useState('Пауза');
+    const [pause, isPause] = useState(true);
 
     function firstRequest() {
         axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_MAINDATA}`)
             .then(function (response) {
+                console.log(response.data)
                 setArr(response.data);
             })
             .catch(function (error) {
@@ -35,8 +38,41 @@ function Route_trip() {
         isShowPause(false);
     }
 
-    const list = arr.map((item) =>
-        <Cells key={item.id} val={item}/>
+    function passagePoint(obj){
+        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_CHECK_POINT}`, JSON.stringify(obj))
+            .then(function (response) {
+                alert('Данные обновлены');
+                setArr(response.data);
+            })
+            .catch(function (error) {
+                alert(JSON.stringify(error))
+            });
+    }
+
+    function pauseRoute(){
+        setPauseText(pause ? 'Продолжить' : 'Пауза');
+        isPause(!pause);
+        let actDate = Date.now();
+        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_PAUSE_ROUTE}`, JSON.stringify({status: pause, actTime: actDate}))
+            .then(function (response) {
+                if(pause){
+                    alert(response.data.status);
+                    return false;
+                }
+                alert('Маршрут возобновлен');
+                setArr(response.data);
+            })
+            .catch(function (error) {
+                alert(JSON.stringify(error))
+            });
+    }
+
+    const list = arr.map((item, index) =>
+        <Cells key={item.id}
+            val={item}
+            id={index}
+            arr={arr}
+            func={passagePoint}/>
     );
 
     useEffect(() => {
@@ -67,6 +103,9 @@ function Route_trip() {
                 <p className={style.time}>
                     Время
                 </p>
+                <p className={style.timetable}>
+                    График
+                </p>
             </div>
             <div className={style.tableBody}>
                 {
@@ -75,8 +114,12 @@ function Route_trip() {
             </div>
             <div className={style.navigateBlock}>
                 <Link className={style.link} to="/add_point">Добавить точку</Link>
-                <button type='button' className={style.startBtn} onClick={() => startRoute()}>Старт</button>
-                <button type='button' className={showPause ? [style.pauseBtn, style.show] : style.pauseBtn}>Пауза</button>
+                <button type='button'
+                    className={showPause ? style.startBtn + ' ' + style.activePause : style.startBtn}
+                    onClick={() => startRoute()}>Старт</button>
+                <button type='button'
+                    className={showPause ? [style.pauseBtn + ' ' + style.show] : style.pauseBtn}
+                    onClick={() => pauseRoute()}>{pauseText}</button>
                 <button type='button' className={style.stopBtn} onClick={() => stopRoute()}>Стоп</button>
             </div>
         </div>
