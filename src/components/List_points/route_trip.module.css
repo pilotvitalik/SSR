@@ -94,11 +94,11 @@
 	width:  120px;
 }
 .tableBody .duration.notInput{
-	width: 100%;
+	width: 95%;
 	text-align: center;
 }
 .tableBody .duration{
-	width: calc(100% - 2px);
+	width: calc(95% - 2px);
 }
 .durationBlock,
 .speedBlock,
@@ -123,28 +123,28 @@
 	text-align: center;
 }
 .tableBody .speed.notInput{
-	width:  100%;
+	width:  95%;
 	text-align: center;
 }
 .tableBody .speed{
-	width:  calc(100% - 2px);
+	width:  calc(95% - 2px);
 }
 .tableBody .distance.notInput{
-	width:  100%;
+	width:  95%;
 	text-align: center;
 }
 .tableBody .distance{
-	width: calc(100% - 2px);
+	width: calc(95% - 2px);
 }
 .tableBody .timetable{
 	width: 60px;
 }
 .tableBody .recSpeed.notInput{
-	width:  100%;
+	width:  95%;
 }
 .tableBody .recSpeed{
 	text-align: center;
-	width:  calc(100% - 2px);
+	width:  calc(95% - 2px);
 }
 .timetable.later{
 	color:  #ff5858;
@@ -229,6 +229,9 @@
 .actPoint,
 .actPoint .notInput{
 	background:  #ffbb40;
+}
+.hideStartBtn{
+	display: none;
 }
 @media (min-width:  992px){
 	.tableTitle{

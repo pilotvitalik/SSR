@@ -9,12 +9,16 @@ function Route_trip() {
     const [showPause, isShowPause] = useState(false);
     const [pauseText, setPauseText] = useState('Пауза');
     const [pause, isPause] = useState(true);
+    const [hideStartBtn, isHide] = useState('');
 
     function firstRequest() {
         axios.get(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_MAINDATA}`)
             .then(function (response) {
-                console.log(response.data)
                 setArr(response.data);
+                console.log(response.data[0].isChecked)
+                console.log(Boolean(response.data[0].isChecked));
+                isHide(Boolean(response.data[0].isChecked) ? style.hideStartBtn : '');
+                isShowPause((response.data[0].isChecked === '1') ? true : false)
             })
             .catch(function (error) {
                 alert(error);
@@ -79,6 +83,7 @@ function Route_trip() {
         firstRequest();
     }, [])
 
+    console.log(showPause)
     return (
         <div className={style.wrapper}>
             <div className={style.tableTitle}>
@@ -118,7 +123,7 @@ function Route_trip() {
             <div className={style.navigateBlock}>
                 <Link className={style.link} to="/add_point">Добавить точку</Link>
                 <button type='button'
-                    className={showPause ? style.startBtn + ' ' + style.activePause : style.startBtn}
+                    className={showPause ? hideStartBtn : style.startBtn}
                     onClick={() => startRoute()}>Старт</button>
                 <button type='button'
                     className={showPause ? [style.pauseBtn + ' ' + style.show] : style.pauseBtn}

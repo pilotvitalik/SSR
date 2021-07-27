@@ -89,7 +89,7 @@ function CellsRow(props){
             </label>
             {pointField}
             <div className={style.durationBlock}>
-                <label for={'duration_' + props.val.id}>Длительность:</label>
+                <label htmlFor={'duration_' + props.val.id}>Длительность:</label>
                 <input type='text'
                    id={'duration_' + props.val.id}
                    value={duration}
@@ -97,7 +97,7 @@ function CellsRow(props){
                    onChange={(e) => changeVal(e, updDuration, 'duration')}/>
             </div>
             <div className={style.speedBlock}>
-                <label for={'speed_' + props.val.id}>Скорость:</label>
+                <label htmlFor={'speed_' + props.val.id}>Скорость:</label>
                 <input type='text'
                    id={'speed_' + props.val.id}
                    value={speed}
@@ -105,7 +105,7 @@ function CellsRow(props){
                    onChange={(e) => changeVal(e, updSpeed, 'speed')}/>
             </div>
             <div className={style.recSpeedBlock}>
-                <label for={'recSpeed_' + props.val.id}>Рекомендуемая:</label>
+                <label htmlFor={'recSpeed_' + props.val.id}>Рекомендуемая:</label>
                 <input type='text'
                    id={'recSpeed_' + props.val.id}
                    value={recSpeed}
@@ -113,7 +113,7 @@ function CellsRow(props){
                    onChange={(e) => changeVal(e, updRecSpeed, 'recommend_speed')}/>
             </div> 
             <div className={style.distanceBlock}>
-                <label for={'distance_' + props.val.id}>Расстояние:</label>
+                <label htmlFor={'distance_' + props.val.id}>Расстояние:</label>
                 <input type='text'
                    id={'distance_' + props.val.id}
                    value={distance}
