@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import style from './route_trip.module.css';
 
 function CellsRow(props){
     const [point, updPoint] = useState(props.val.point);
     const [duration, updDuration] = useState(props.val.duration);
     const [speed, updSpeed] = useState(props.val.speed);
+    const [recSpeed, updRecSpeed] = useState(props.val.recommend_speed);
     const [distance, updDistance] = useState(props.val.distance);
     const [isModify, setModify] = useState(false);
     const [collectData, changeSendData] = useState({});
@@ -65,7 +65,7 @@ function CellsRow(props){
         ? <textarea value={point}
                     className={style.point}
                     onChange={(e) => changeVal(e, updPoint, 'point')}/>
-        : <Link to={process.env.REACT_APP_PHOTO_FOLDER + props.val.id + process.env.REACT_APP_PHOTO_EXTENSION} className={style.point + ' ' + style.notTextarea}>{point}</Link>
+        : <a href={process.env.REACT_APP_PHOTO_FOLDER + props.val.id + process.env.REACT_APP_PHOTO_EXTENSION} className={style.point + ' ' + style.notTextarea}>{point}</a>
 
     let actPoint = '';
     if (+props.id !== 0){
@@ -96,6 +96,10 @@ function CellsRow(props){
                    value={speed}
                    className={!isModify ? style.speed + ' ' + style.notInput : style.speed}
                    onChange={(e) => changeVal(e, updSpeed, 'speed')}/>
+            <input type='text'
+                   value={recSpeed}
+                   className={!isModify ? style.recSpeed + ' ' + style.notInput : style.recSpeed}
+                   onChange={(e) => changeVal(e, updRecSpeed, 'recommend_speed')}/>   
             <input type='text'
                    value={distance}
                    className={!isModify ? style.distance + ' ' + style.notInput : style.distance}

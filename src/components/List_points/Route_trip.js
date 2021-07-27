@@ -97,6 +97,9 @@ function Route_trip() {
                 <p className={style.speed}>
                     Скорость
                 </p>
+                <p className={style.recSpeed}>
+                    Рекомендуемая
+                </p>
                 <p className={style.distance}>
                     Расстояние
                 </p>

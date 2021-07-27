@@ -43,9 +43,11 @@
 .tableBody>div textarea{
 	width:  160px;
 }
-.tableTitle .point,
-.tableBody .point.notTextarea{
+.tableTitle .point{
 	width:  150px;
+}
+.tableBody .point.notTextarea{
+	width: 160px;
 }
 .tableBody .point{
 	width:  154px;
@@ -87,6 +89,14 @@
 .tableTitle .timetable,
 .tableBody .timetable{
 	width: 60px;
+}
+.tableTitle .recSpeed,
+.tableBody .recSpeed.notInput{
+	width:  135px;
+}
+.tableBody .recSpeed{
+	text-align: center;
+	width:  133px;
 }
 .timetable.later{
 	color:  #ff5858;
