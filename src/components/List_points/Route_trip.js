@@ -26,30 +26,56 @@ function Route_trip() {
     }
 
     function startRoute(){
-        let passwd = prompt('Введите пароль:')
         let startDate = Date.now();
-        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`, JSON.stringify({time: startDate, password: passwd}))
-            .then(function (response) {
-                if (Array.isArray(response.data)){
-                    setArr(response.data);
-                    alert('Время пересчитано');
-                    return false;
-                }
-                alert(response.data)
-            })
-            .catch(function (error) {
-                alert(error);
-            })
-        isShowPause(true);
+        if (localStorage.getItem('routePasswd') === null){
+            let passwd = prompt('Введите пароль:');
+            if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+              alert('Неправильный пароль')
+              return false;
+            }
+            localStorage.setItem('routePasswd', passwd);
+            axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`, JSON.stringify({time: startDate}))
+                .then(function (response) {
+                    if (Array.isArray(response.data)){
+                        setArr(response.data);
+                        alert('Время пересчитано');
+                        return false;
+                    }
+                    alert(response.data)
+                })
+                .catch(function (error) {
+                    alert(error);
+                })
+            isShowPause(true);
+        } else {
+            axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`, JSON.stringify({time: startDate}))
+                .then(function (response) {
+                    if (Array.isArray(response.data)){
+                        setArr(response.data);
+                        alert('Время пересчитано');
+                        return false;
+                    }
+                    alert(response.data)
+                })
+                .catch(function (error) {
+                    alert(error);
+                })
+            isShowPause(true);
+        }
     }
 
     function stopRoute(){
-        let passwd = prompt('Введите пароль:')
-        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
-          alert('Неправильный пароль')
-          return false;
+        if (localStorage.getItem('routePasswd') === null){
+            let passwd = prompt('Введите пароль:')
+            if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+              alert('Неправильный пароль')
+              return false;
+            }
+            localStorage.setItem('routePasswd', passwd);
+            isShowPause(false);
+        } else {
+            isShowPause(false);
         }
-        isShowPause(false);
     }
 
     function passagePoint(obj){
@@ -64,26 +90,45 @@ function Route_trip() {
     }
 
     function pauseRoute(){
-        let passwd = prompt('Введите пароль:')
-        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
-          alert('Неправильный пароль')
-          return false;
+        if (localStorage.getItem('routePasswd') === null){
+            let passwd = prompt('Введите пароль:')
+            if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+              alert('Неправильный пароль')
+              return false;
+            }
+            localStorage.setItem('routePasswd', passwd);
+            setPauseText(pause ? 'Продолжить' : 'Пауза');
+            isPause(!pause);
+            let actDate = Date.now();
+            axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_PAUSE_ROUTE}`, JSON.stringify({status: pause, actTime: actDate}))
+                .then(function (response) {
+                    if(pause){
+                        alert(response.data.status);
+                        return false;
+                    }
+                    alert('Маршрут возобновлен');
+                    setArr(response.data);
+                })
+                .catch(function (error) {
+                    alert(JSON.stringify(error))
+                });
+        } else {
+            setPauseText(pause ? 'Продолжить' : 'Пауза');
+            isPause(!pause);
+            let actDate = Date.now();
+            axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_PAUSE_ROUTE}`, JSON.stringify({status: pause, actTime: actDate}))
+                .then(function (response) {
+                    if(pause){
+                        alert(response.data.status);
+                        return false;
+                    }
+                    alert('Маршрут возобновлен');
+                    setArr(response.data);
+                })
+                .catch(function (error) {
+                    alert(JSON.stringify(error))
+                });
         }
-        setPauseText(pause ? 'Продолжить' : 'Пауза');
-        isPause(!pause);
-        let actDate = Date.now();
-        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_PAUSE_ROUTE}`, JSON.stringify({status: pause, actTime: actDate}))
-            .then(function (response) {
-                if(pause){
-                    alert(response.data.status);
-                    return false;
-                }
-                alert('Маршрут возобновлен');
-                setArr(response.data);
-            })
-            .catch(function (error) {
-                alert(JSON.stringify(error))
-            });
     }
 
     const list = arr.map((item, index) =>

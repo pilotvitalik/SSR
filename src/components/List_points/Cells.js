@@ -13,14 +13,21 @@ function CellsRow(props){
     const [isChecked, setChecked] = useState(+props.val.isChecked);
 
     function modifyString(){
-        let passwd = prompt('Введите пароль:')
-        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
-          alert('Неправильный пароль')
-          return false;
+        if (localStorage.getItem('routePasswd') === null){
+            let passwd = prompt('Введите пароль:');
+            if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+              alert('Неправильный пароль')
+              return false;
+            }
+            localStorage.setItem('routePasswd', passwd);
+            !isModify
+                ? setModify(true)
+                : sendData();
+        } else {
+            !isModify
+                ? setModify(true)
+                : sendData();
         }
-        !isModify
-            ? setModify(true)
-            : sendData();
     }
 
     function changeVal(e, func, titleField){
@@ -43,18 +50,29 @@ function CellsRow(props){
     }
 
     function deleteString(){
-        let passwd = prompt('Введите пароль:')
-        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
-          alert('Неправильный пароль')
-          return false;
+        if (localStorage.getItem('routePasswd') === null){
+            let passwd = prompt('Введите пароль:');
+            if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+              alert('Неправильный пароль')
+              return false;
+            }
+            localStorage.setItem('routePasswd', passwd);
+            axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_DELETE}`, JSON.stringify({id: props.val.id}))
+                .then(function (response) {
+                    alert(response.data);
+                })
+                .catch(function (error) {
+                    alert(JSON.stringify(error))
+                });
+        } else {
+            axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_DELETE}`, JSON.stringify({id: props.val.id}))
+                .then(function (response) {
+                    alert(response.data);
+                })
+                .catch(function (error) {
+                    alert(JSON.stringify(error))
+                });
         }
-        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_DELETE}`, JSON.stringify({id: props.val.id}))
-            .then(function (response) {
-                alert(response.data);
-            })
-            .catch(function (error) {
-                alert(JSON.stringify(error))
-            });
     }
 
     function prepareForAjax(){
@@ -64,7 +82,17 @@ function CellsRow(props){
             val: !isChecked,
             time: startDate,
         }
-        props.func(obj);
+        if (localStorage.getItem('routePasswd') === null){
+            let passwd = prompt('Введите пароль:');
+            if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+              alert('Неправильный пароль')
+              return false;
+            }
+            localStorage.setItem('routePasswd', passwd);
+            props.func(obj);
+        } else {
+            props.func(obj);
+        }
     }
 
     useEffect(() => {

@@ -17,6 +17,7 @@ function Add_point(){
 		const coefSpeed = 3.6;
 		const speed = (Number(distance) * coefDistance) / (Number(duration) * coefTime) * coefSpeed;
 		const obj = {};
+		console.log(passwd)
 		obj.title = title;
 		obj.distance = distance;
 		obj.duration = duration;
@@ -26,12 +27,26 @@ function Add_point(){
 		} else {
 			obj.speed = String(Math.round(speed * 0.85));
 		}
-		sendData(JSON.stringify(obj));
+		checkPasswd(JSON.stringify(obj));
 		setTitle('');
 		setDistance('');
 		setDuration('');
 		setStatusReq('');
 		setPasswd('');
+	}
+
+	function checkPasswd(data){
+		if (localStorage.getItem('routePasswd') === null){
+			let newData = JSON.parse(data)
+			if (newData.password !== process.env.REACT_APP_ROOT_PASSWD){
+	          alert('Неправильный пароль')
+	          return false;
+	        }
+	        localStorage.setItem('routePasswd', newData.password);
+	        sendData(data);
+    	} else {
+    		sendData(data);
+    	}
 	}
 
 	function sendData(data){
