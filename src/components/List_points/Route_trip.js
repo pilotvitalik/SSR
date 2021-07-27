@@ -64,6 +64,11 @@ function Route_trip() {
     }
 
     function pauseRoute(){
+        let passwd = prompt('Введите пароль:')
+        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+          alert('Неправильный пароль')
+          return false;
+        }
         setPauseText(pause ? 'Продолжить' : 'Пауза');
         isPause(!pause);
         let actDate = Date.now();
