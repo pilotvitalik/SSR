@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import style from './route_trip.module.css';
 
 function CellsRow(props){
@@ -64,7 +65,7 @@ function CellsRow(props){
         ? <textarea value={point}
                     className={style.point}
                     onChange={(e) => changeVal(e, updPoint, 'point')}/>
-        : <p className={style.point + ' ' + style.notTextarea}>{point}</p>
+        : <Link to={process.env.REACT_APP_PHOTO_FOLDER + props.val.id + process.env.REACT_APP_PHOTO_EXTENSION} className={style.point + ' ' + style.notTextarea}>{point}</Link>
 
     let actPoint = '';
     if (+props.id !== 0){
@@ -73,10 +74,12 @@ function CellsRow(props){
         : ''
     }
 
-    return(
-        <div className={Boolean(+props.val.isChecked)
+    let isPassedPoint = Boolean(+props.val.isChecked)
             ? style.passedPoint
-            : '' + ' ' + actPoint}>
+            : '';
+
+    return(
+        <div className={`${isPassedPoint} ${actPoint}`}>
             <p className={style.idPoint}>{props.val.id}</p>
             <label className={style.status}>
                 <input type='checkbox'
