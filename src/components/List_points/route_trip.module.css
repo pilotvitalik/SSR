@@ -1,26 +1,61 @@
+/*
+* Browsers: last 4 version
+*/
+
 .wrapper{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: column;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 	position: relative;
 	width: 100%;
 	height: auto;
 }
 .tableTitle,
 .tableBody>div{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	position: relative;
+	width: auto;
+	height: auto;
+}
+.tableTitle{
+	display: none;
+}
+.tableBody>div{
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+}
+.tableBody{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	position: relative;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
 	width: fit-content;
 	height: auto;
 }
-.tableBody{
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	width: fit-content;
-	height: auto;
+.tableBody>div{
+	padding: 10px;
+	border-bottom: 1px solid grey;
 }
 .tableTitle p,
 .tableBody>div p{
@@ -31,20 +66,23 @@
 	padding: 5px;
 	text-align: center;
 }
-.tableTitle .status{
-	width:  55px;
+.tableBody>div>p:first-child{
+	font-weight: 600;
 }
-.tableBody>div label{
+.tableBody>div>label{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	width:  65px;
 }
 .tableBody>div textarea{
 	width:  160px;
-}
-.tableTitle .point{
-	width:  150px;
 }
 .tableBody .point.notTextarea{
 	width: 160px;
@@ -52,51 +90,61 @@
 .tableBody .point{
 	width:  154px;
 }
-.tableTitle .time,
 .tableBody .time{
 	width:  120px;
 }
-.tableTitle .duration{
-	width:  70px;
-}
 .tableBody .duration.notInput{
-	width: 74px;
+	width: 100%;
 	text-align: center;
 }
 .tableBody .duration{
-	width: 72px;
+	width: calc(100% - 2px);
 }
-.tableTitle .speed{
-	width: 85px;
+.durationBlock,
+.speedBlock,
+.recSpeedBlock,
+.distanceBlock{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	position: relative;
+	width:  50%;
+	height:  auto;
+	margin-bottom:  10px;
+}
+.durationBlock label,
+.speedBlock label,
+.recSpeedBlock label,
+.distanceBlock label{
+	text-align: center;
 }
 .tableBody .speed.notInput{
-	width:  89px;
+	width:  100%;
 	text-align: center;
 }
 .tableBody .speed{
-	width:  87px;
-}
-.tableTitle .distance{
-	width: 90px;
+	width:  calc(100% - 2px);
 }
 .tableBody .distance.notInput{
-	width:  94px;
+	width:  100%;
 	text-align: center;
 }
 .tableBody .distance{
-	width: 92px;
+	width: calc(100% - 2px);
 }
-.tableTitle .timetable,
 .tableBody .timetable{
 	width: 60px;
 }
-.tableTitle .recSpeed,
 .tableBody .recSpeed.notInput{
-	width:  135px;
+	width:  100%;
 }
 .tableBody .recSpeed{
 	text-align: center;
-	width:  133px;
+	width:  calc(100% - 2px);
 }
 .timetable.later{
 	color:  #ff5858;
@@ -113,9 +161,15 @@
 	resize: none;
 }
 .modifyBlock{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
 	position: relative;
 	width: auto;
 	height: 100%;
@@ -126,11 +180,25 @@
 	margin-right: 7px;
 }
 .navigateBlock{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
 	position: relative;
 	width: 100%;
+	height: auto;
+	margin:  20px 0;
+	padding:  10px 0;
+}
+.navigateBlock>a{
+	display: inline-block;
+	position: relative;
+	width: 80px;
 	height: auto;
 }
 .startBtn,
@@ -161,4 +229,87 @@
 .actPoint,
 .actPoint .notInput{
 	background:  #ffbb40;
+}
+@media (min-width:  992px){
+	.tableTitle{
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+	.tableTitle p{
+		width:  35px;
+	}
+	.tableTitle p:first-child{
+		padding-left: 10px;
+	}
+	.tableBody>div p{
+		width: 30px;
+	}
+	.tableTitle .status{
+		width:  55px;
+	}
+	.tableTitle .point{
+		width:  150px;
+	}
+	.tableTitle .duration{
+		width:  70px;
+	}
+	.tableTitle .speed{
+		width: 85px;
+	}
+	.tableTitle .recSpeed{
+		width: 130px;
+	}
+	.tableTitle .distance{
+		width: 90px;
+	}
+	.tableTitle .time{
+		width:  120px;
+	}
+	.tableTitle .timetable{
+		width: 60px;
+	}
+	.durationBlock label,
+	.speedBlock label,
+	.recSpeedBlock label,
+	.distanceBlock label{
+		display: none;
+	}
+	.durationBlock,
+	.speedBlock,
+	.recSpeedBlock,
+	.distanceBlock{
+		width: auto;
+	}
+	.tableBody .duration.notInput{
+		width: 74px;
+		text-align: center;
+	}
+	.tableBody .duration{
+		width: 72px;
+	}
+	.tableBody .speed.notInput{
+		width: 89px;
+	}
+	.tableBody .speed{
+		text-align: center;
+		width: 87px;
+	}
+	.tableBody .recSpeed.notInput{
+		width: 134px;
+	}
+	.tableBody .recSpeed{
+		text-align: center;
+		width: 132px;
+	}
+	.tableBody .distance.notInput{
+		width:  94px;
+		text-align: center;
+	}
+	.tableBody .distance{
+		width: 92px;
+	}
+	.navigateBlock>a{
+		width: 130px;
+	}
 }

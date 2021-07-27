@@ -88,22 +88,38 @@ function CellsRow(props){
                     onChange={() => prepareForAjax()}/>
             </label>
             {pointField}
-            <input type='text'
+            <div className={style.durationBlock}>
+                <label for={'duration_' + props.val.id}>Длительность:</label>
+                <input type='text'
+                   id={'duration_' + props.val.id}
                    value={duration}
                    className={!isModify ? style.duration + ' ' + style.notInput : style.duration}
                    onChange={(e) => changeVal(e, updDuration, 'duration')}/>
-            <input type='text'
+            </div>
+            <div className={style.speedBlock}>
+                <label for={'speed_' + props.val.id}>Скорость:</label>
+                <input type='text'
+                   id={'speed_' + props.val.id}
                    value={speed}
                    className={!isModify ? style.speed + ' ' + style.notInput : style.speed}
                    onChange={(e) => changeVal(e, updSpeed, 'speed')}/>
-            <input type='text'
+            </div>
+            <div className={style.recSpeedBlock}>
+                <label for={'recSpeed_' + props.val.id}>Рекомендуемая:</label>
+                <input type='text'
+                   id={'recSpeed_' + props.val.id}
                    value={recSpeed}
                    className={!isModify ? style.recSpeed + ' ' + style.notInput : style.recSpeed}
-                   onChange={(e) => changeVal(e, updRecSpeed, 'recommend_speed')}/>   
-            <input type='text'
+                   onChange={(e) => changeVal(e, updRecSpeed, 'recommend_speed')}/>
+            </div> 
+            <div className={style.distanceBlock}>
+                <label for={'distance_' + props.val.id}>Расстояние:</label>
+                <input type='text'
+                   id={'distance_' + props.val.id}
                    value={distance}
                    className={!isModify ? style.distance + ' ' + style.notInput : style.distance}
                    onChange={(e) => changeVal(e, updDistance, 'distance')}/>
+            </div> 
             <p className={style.time}>
                 {props.val.time}
             </p>
