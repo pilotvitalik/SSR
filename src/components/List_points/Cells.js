@@ -13,6 +13,11 @@ function CellsRow(props){
     const [isChecked, setChecked] = useState(+props.val.isChecked);
 
     function modifyString(){
+        let passwd = prompt('Введите пароль:')
+        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+          alert('Неправильный пароль')
+          return false;
+        }
         !isModify
             ? setModify(true)
             : sendData();
@@ -38,6 +43,11 @@ function CellsRow(props){
     }
 
     function deleteString(){
+        let passwd = prompt('Введите пароль:')
+        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+          alert('Неправильный пароль')
+          return false;
+        }
         axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_DELETE}`, JSON.stringify({id: props.val.id}))
             .then(function (response) {
                 alert(response.data);

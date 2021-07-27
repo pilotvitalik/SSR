@@ -8,6 +8,7 @@ function Add_point(){
 	const [distance, setDistance] = useState('');
 	const [duration, setDuration] = useState('');
 	const [statusReq, setStatusReq] = useState('');
+	const [passwd, setPasswd] = useState('');
 
 
 	function addPoint(e){
@@ -19,6 +20,7 @@ function Add_point(){
 		obj.title = title;
 		obj.distance = distance;
 		obj.duration = duration;
+		obj.password = passwd;
 		if (isNaN(distance) && isNaN(duration)){
 			obj.speed = '-';
 		} else {
@@ -29,6 +31,7 @@ function Add_point(){
 		setDistance('');
 		setDuration('');
 		setStatusReq('');
+		setPasswd('');
 	}
 
 	function sendData(data){
@@ -77,6 +80,14 @@ function Add_point(){
 						name='duration'
 						value={duration}
 						onChange={(event) => setDuration(event.target.value)}/>
+				</label>
+				{/*TODO убрать пароль после добавления нормальной авторизации*/}
+				<label>
+					Пароль:
+					<input type='text'
+						name='password'
+						value={passwd}
+						onChange={(event) => setPasswd(event.target.value)}/>
 				</label>
 				<button type='button' onClick={addPoint}>
 					Добавить

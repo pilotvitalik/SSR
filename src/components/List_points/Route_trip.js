@@ -26,11 +26,16 @@ function Route_trip() {
     }
 
     function startRoute(){
+        let passwd = prompt('Введите пароль:')
         let startDate = Date.now();
-        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`, JSON.stringify({time: startDate}))
+        axios.post(`${process.env.REACT_APP_HOSTNAME}${process.env.REACT_APP_START_ID}`, JSON.stringify({time: startDate, password: passwd}))
             .then(function (response) {
-                setArr(response.data);
-                alert('Время пересчитано');
+                if (Array.isArray(response.data)){
+                    setArr(response.data);
+                    alert('Время пересчитано');
+                    return false;
+                }
+                alert(response.data)
             })
             .catch(function (error) {
                 alert(error);
@@ -39,6 +44,11 @@ function Route_trip() {
     }
 
     function stopRoute(){
+        let passwd = prompt('Введите пароль:')
+        if (passwd !== process.env.REACT_APP_ROOT_PASSWD){
+          alert('Неправильный пароль')
+          return false;
+        }
         isShowPause(false);
     }
 
